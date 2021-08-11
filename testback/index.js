@@ -22,6 +22,17 @@ app.get("/signup", (req,res) => {
     return res.send("signup to enjoy our services")
 })
 
+const admin = (req,res) => {
+    return res.send("this is admin with var");
+}
+
+const isAdmin = (req,res,next) => {
+    return res.send("is Admin is running");
+    next();
+}
+
+app.get("/admin",isAdmin, admin);
+
 app.get("/charu", (req,res) => {
     return res.send("learning ")
 })
