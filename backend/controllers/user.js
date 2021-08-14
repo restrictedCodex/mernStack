@@ -61,34 +61,32 @@ exports.userPurchaseList = (req, res) => {
     });
 };
 
-exports.pushOrderInPurchaseList = (req,res, next) => {
-    
-    let purchases = [];
-    req.body.order.products.forEach(product => {
-        purchases.push({
-            _id: product._id,
-            name: product.name,
-            description: product.description,
-            category: product.category,
-            quantity: product.quantity,
-            amount: req.body.order,
-            transtion_id: req.body.order.transtion_id
-        });
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  let purchases = [];
+  req.body.order.products.forEach((product) => {
+    purchases.push({
+      _id: product._id,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      quantity: product.quantity,
+      amount: req.body.order,
+      transtion_id: req.body.order.transtion_id,
     });
+  });
 
-    // store in db
-    User.findOneAndUpdate(
-        {_id: req.profile._id},
-        {$push: {purchases: purchases}},
-        {new: true},
-        (err, purchases)=>{
-            if (err) {
-                return res.status(400).json({
-                  error: "unable to add purchase",
-                });
-            }
-            next();
-        }
-    )
-
-}
+  // store in db
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (err, purchases) => {
+      if (err) {
+        return res.status(400).json({
+          error: "unable to add purchase",
+        });
+      }
+      next();
+    }
+  );
+};

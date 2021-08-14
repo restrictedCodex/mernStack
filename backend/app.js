@@ -11,7 +11,6 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 
-
 // DB connection
 console.log(process.env.DATABASE);
 
@@ -20,10 +19,10 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-})
+  })
   .then(() => {
     console.log("DB CONNECTED");
-});
+  });
 
 // Midlewares
 app.use(bodyParser.json());
