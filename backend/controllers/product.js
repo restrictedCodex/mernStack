@@ -28,7 +28,18 @@ exports.createproduct = (req, res) => {
     }
 
     //destructure the fields
-    const {price, name, decription, price, category, stock, } = fields;
+    const {price, name, description, category, stock} = fields;
+    if(
+        !name ||
+        !description ||
+        !price ||
+        !category ||
+        !stock 
+    ){
+        return res.status(400).json({
+            error: "declare all fileds ",
+        });
+    }
 
     //TODO: restriction on feild
     let product = Product(fields);

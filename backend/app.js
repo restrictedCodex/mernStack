@@ -36,6 +36,7 @@ app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
 
 // port and app
 const port = process.env.PORT || 3600;
