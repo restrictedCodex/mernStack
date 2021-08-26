@@ -42,12 +42,7 @@ router.get(
   isAdmin,
   getOrderStatus
 );
-router.put(
-  "/order/:orderId/status/:userId",
-  isSignedIn,
-  isAuthenticated,
-  isAdmin,
-  updateStatus
-);
+
+router.put("/order/:orderId/status/:userId",isSignedIn,isAuthenticated,isAdmin,updateStatus);
 
 module.exports = router;
