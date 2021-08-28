@@ -54,7 +54,7 @@ exports.updateStatus = (req, res) => {
           error: "cannot upadte order status",
         });
       }
-      res.json(order);
+      //res.json(order);
     }
   );
 };
