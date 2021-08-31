@@ -2,19 +2,22 @@ const express = require("express");
 const router = express.Router();
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const { getUserById, pushOrderInPurchaseList } = require("../controllers/user");
-const { updateStock, updateStatus } = require("../controllers/product");
+const { updateStock } = require("../controllers/product");
 
 const {
+  getOrderById,
   createOrder,
   getAllOrders,
   getOrderStatus,
-  getOrderById
+  updateStatus
 } = require("../controllers/order");
 
 //params
 router.param("userId", getUserById);
 router.param("orderId", getOrderById);
 
+//Actual routes
+//create
 router.post(
   "/order/create/:userId",
   isSignedIn,
@@ -23,18 +26,16 @@ router.post(
   updateStock,
   createOrder
 );
-
-router.get("/order/status/:userId");
-router.put("/order/:orderId/status/:userId");
-
+//read
 router.get(
-  "order/all/:userId",
+  "/order/all/:userId",
   isSignedIn,
   isAuthenticated,
   isAdmin,
   getAllOrders
 );
 
+//status of order
 router.get(
   "/order/status/:userId",
   isSignedIn,
@@ -42,7 +43,12 @@ router.get(
   isAdmin,
   getOrderStatus
 );
-
-router.put("/order/:orderId/status/:userId",isSignedIn,isAuthenticated,isAdmin,updateStatus);
+router.put(
+  "/order/:orderId/status/:userId",
+  isSignedIn,
+  isAuthenticated,
+  isAdmin,
+  updateStatus
+);
 
 module.exports = router;
